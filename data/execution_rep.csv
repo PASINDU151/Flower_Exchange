@@ -1,14 +1,28 @@
 Client Order ID,Order ID,Instrument,Side,Price,Quantity,Status,Reason,Transaction Time
-ordC1,ord8,Lotus,0,40.00,100,1,"Invalid Side",20260327-001521.621
-ordC2,ord9,Orchid,1,0.00,100,1,"Invalid Price",20260327-001521.621
-ordC3,ord10,Lavender,2,25.00,35,1,"Quantity Not Multiple Of 10",20260327-001521.621
-ordC4,ord11,Orchid,2,31.50,100,0,"",20260327-001521.622
-ordC5,ord12,Orchid,1,31.50,40,2,"",20260327-001521.622
-ordA1,ord1,Rose,2,55.00,100,0,"",20260327-001521.622
-ordA2,ord2,Rose,2,45.00,100,0,"",20260327-001521.622
-ordA3,ord3,Rose,1,45.00,100,3,"",20260327-001521.622
-ordA3,ord3,Rose,1,45.00,100,3,"Remaining quantity added to book",20260327-001521.622
-ordA4,ord4,Rose,1,55.00,50,2,"",20260327-001521.622
-ordB1,ord5,Tulip,1,20.00,100,0,"",20260327-001521.622
-ordB2,ord6,Tulip,2,20.00,50,2,"",20260327-001521.622
-ordB3,ord7,Tulip,2,20.00,50,2,"",20260327-001521.622
+clID1000,ord1,Rose,2,10.00,30,1,"Client Order ID Too Long",20260327-184208.863
+,ord2,Rose,2,10.00,30,1,"Missing Client Order ID",20260327-184208.863
+clID3_,ord3,Rose,2,10.00,30,1,"Client Order ID Not Alphanumeric",20260327-184208.863
+clID4+,ord4,Rose,2,10.00,30,1,"Client Order ID Not Alphanumeric",20260327-184208.863
+clID500+,ord5,Rose,2,10.00,30,1,"Client Order ID Too Long",20260327-184208.863
+clID5,ord6,,2,10.00,30,1,"Missing Instrument",20260327-184208.863
+clID6,ord7,Sunflower,2,10.00,30,1,"Invalid Instrument",20260327-184208.863
+clID7,ord8,Rose1,2,10.00,30,1,"Invalid Instrument",20260327-184208.863
+clID9,ord10,rose,2,10.00,30,1,"Invalid Instrument",20260327-184208.863
+clID10,ord11,Rose,0,10.00,30,1,"Invalid Side",20260327-184208.863
+clID11,ord12,Rose,0,10.00,30,1,"Invalid Side",20260327-184208.863
+clID12,ord13,Rose,0,10.00,30,1,"Invalid Side",20260327-184208.863
+clID13,ord14,Rose,0,10.00,30,1,"Invalid Side",20260327-184208.863
+clID14,ord15,Rose,0,10.00,30,1,"Invalid Side",20260327-184208.863
+clID15,ord16,Rose,0,10.00,30,1,"Invalid Side",20260327-184208.863
+clID16,ord17,Rose,1,0.00,30,1,"Invalid Price",20260327-184208.863
+clID17,ord18,Rose,1,0.00,30,1,"Invalid Price",20260327-184208.863
+clID18,ord19,Rose,1,0.00,30,1,"Invalid Price",20260327-184208.863
+clID20,ord21,Rose,1,-0.10,30,1,"Invalid Price",20260327-184208.863
+clID21,ord22,Rose,1,10.00,0,1,"Invalid Quantity Range",20260327-184208.863
+clID22,ord23,Rose,1,10.00,0,1,"Invalid Quantity Range",20260327-184208.863
+clID23,ord24,Rose,1,10.00,-100,1,"Invalid Quantity Range",20260327-184208.863
+clID24,ord25,Rose,1,10.00,21,1,"Quantity Not Multiple Of 10",20260327-184208.863
+clID8,ord9,Rose,2,10.00,30,0,"",20260327-184208.864
+clID19,ord20,Rose,1,0.10,30,0,"",20260327-184208.864
+clID25,ord26,Rose,1,10.00,30,3,"",20260327-184208.864
+clID25,ord26,Rose,1,10.00,99970,3,"Remaining quantity added to book",20260327-184208.864

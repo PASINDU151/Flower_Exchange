@@ -36,9 +36,13 @@ std::vector<Order> CsvReader::readOrders(const std::string& filePath) {
         if (cols.size() > 0) order.clientOrderId = cols[0];
         if (cols.size() > 1) order.instrument = cols[1];
         if (cols.size() > 2) {
-            try {
-                order.side = Utils::intToSide(std::stoi(cols[2]));
-            } catch (...) {
+            const std::string& sideStr = cols[2];
+
+            if (sideStr == "1") {
+                order.side = Side::Buy;
+            } else if (sideStr == "2") {
+                order.side = Side::Sell;
+            } else {
                 order.side = Side::Unknown;
             }
         }
