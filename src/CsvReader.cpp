@@ -24,9 +24,18 @@ std::vector<Order> CsvReader::readOrders(const std::string& filePath) {
         if (firstLine) {
             firstLine = false;
             if (!cols.empty()) {
-                std::string c0 = cols[0];
+                std::string c0 = Utils::trim(cols[0]);
+                std::string c1 = cols.size() > 1 ? Utils::trim(cols[1]) : "";
+                std::string c2 = cols.size() > 2 ? Utils::trim(cols[2]) : "";
+
                 for (auto& ch : c0) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
-                if (c0.find("client") != std::string::npos) {
+                for (auto& ch : c1) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
+                for (auto& ch : c2) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
+
+                if (c0 == "cl. ord.id" ||
+                    c0 == "client order id" ||
+                    c0.find("client") != std::string::npos ||
+                    (c1 == "instrument" && c2 == "side")) {
                     continue;
                 }
             }
