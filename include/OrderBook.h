@@ -25,8 +25,8 @@ private:
     Metrics& metrics_;
     SwapManager& swapManager_;
 
-    std::map<double, PriceLevel, std::greater<double>> buyLevels_;
-    std::map<double, PriceLevel, std::less<double>> sellLevels_;
+    std::map<double, PriceLevel, std::greater<double>> buyLevels_; // highest first
+    std::map<double, PriceLevel> sellLevels_;                      // lowest first
 
     mutable std::mutex mutex_;
 

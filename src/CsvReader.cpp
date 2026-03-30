@@ -48,18 +48,19 @@ std::vector<Order> CsvReader::readOrders(const std::string& filePath) {
         }
         if (cols.size() > 3) {
             try {
-                order.price = std::stod(cols[3]);
-            } catch (...) {
-                order.price = 0.0;
-            }
-        }
-        if (cols.size() > 4) {
-            try {
-                order.quantity = std::stoi(cols[4]);
+                order.quantity = std::stoi(cols[3]);
             } catch (...) {
                 order.quantity = 0;
             }
         }
+        if (cols.size() > 4) {
+            try {
+                order.price = std::stod(cols[4]);
+            } catch (...) {
+                order.price = 0.0;
+            }
+        }
+
 
         order.sequence = seq++;
         order.systemOrderId = Utils::generateSystemOrderId();

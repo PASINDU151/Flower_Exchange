@@ -103,10 +103,17 @@ std::vector<ExecutionReport> OrderBook::processOrder(const Order& incoming) {
             resting.quantity -= matchQty;
             executedQty += matchQty;
 
-            ExecStatus status = (working.quantity == 0 && executedQty == originalQty)
+            ExecStatus incomingStatus = (working.quantity == 0)
                 ? ExecStatus::Fill : ExecStatus::PFill;
 
-            reports.push_back(makeReport(incoming, status, matchQty, bestSellPrice));
+            ExecStatus restingStatus = (resting.quantity == 0)
+                ? ExecStatus::Fill : ExecStatus::PFill;
+
+            // report for incoming buy order
+            reports.push_back(makeReport(incoming, incomingStatus, matchQty, bestSellPrice));
+
+            // report for resting sell order
+            reports.push_back(makeReport(resting, restingStatus, matchQty, bestSellPrice));
 
             if (resting.quantity == 0) {
                 levelQueue.pop_front();
@@ -132,10 +139,17 @@ std::vector<ExecutionReport> OrderBook::processOrder(const Order& incoming) {
             resting.quantity -= matchQty;
             executedQty += matchQty;
 
-            ExecStatus status = (working.quantity == 0 && executedQty == originalQty)
+            ExecStatus incomingStatus = (working.quantity == 0)
                 ? ExecStatus::Fill : ExecStatus::PFill;
 
-            reports.push_back(makeReport(incoming, status, matchQty, bestBuyPrice));
+            ExecStatus restingStatus = (resting.quantity == 0)
+                ? ExecStatus::Fill : ExecStatus::PFill;
+
+            // report for incoming sell order
+            reports.push_back(makeReport(incoming, incomingStatus, matchQty, bestBuyPrice));
+
+            // report for resting buy order
+            reports.push_back(makeReport(resting, restingStatus, matchQty, bestBuyPrice));
 
             if (resting.quantity == 0) {
                 levelQueue.pop_front();
@@ -153,8 +167,8 @@ std::vector<ExecutionReport> OrderBook::processOrder(const Order& incoming) {
         reports.push_back(makeReport(working, ExecStatus::New, working.quantity, working.price));
     } else if (working.quantity > 0) {
         addRemainingToBookUnsafe(working);
-        reports.push_back(makeReport(working, ExecStatus::PFill, working.quantity, working.price,
-                                     "Remaining quantity added to book"));
+        // reports.push_back(makeReport(working, ExecStatus::PFill, working.quantity, working.price,
+        //                             "Remaining quantity added to book"));
     }
 
     maybeSpillToDiskUnsafe();

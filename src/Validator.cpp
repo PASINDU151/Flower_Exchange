@@ -20,10 +20,10 @@ ValidationResult Validator::validate(const Order& order) const {
 
     // Validate Instrument
     const std::string& instrument = order.instrument;
-    if (instrument.empty()) {
-        return {false, "Missing Instrument"};
-    }
-    if (!Utils::isValidInstrument(instrument)) {
+    // if (instrument.empty()) {
+    //     return {false, "Missing Instrument"};
+    // }
+    if (instrument.empty() || !Utils::isValidInstrument(instrument)) {
         return {false, "Invalid Instrument"};
     }
 
@@ -38,7 +38,7 @@ ValidationResult Validator::validate(const Order& order) const {
     }
 
     //validate Quantity
-    if (order.quantity < 10 ) {
+    if (order.quantity < 10 || order.quantity > 1000) {
         return {false, "Invalid Quantity Range"};
     }
     if (order.quantity % 10 != 0) {

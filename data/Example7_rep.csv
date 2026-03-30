@@ -1,0 +1,7 @@
+Client Order ID,Order ID,Instrument,Side,Price,Quantity,Status,Reason,Transaction Time
+Cl. Ord.ID,ord1,Instrument,0,0.00,0,1,"Client Order ID Too Long",20260330-093613.038
+aa13,ord2,,1,55.00,100,1,"Missing Instrument",20260330-093613.038
+aa14,ord3,Rose,0,65.00,100,1,"Invalid Side",20260330-093613.038
+aa15,ord4,Lavender,2,1.00,101,1,"Quantity Not Multiple Of 10",20260330-093613.038
+aa16,ord5,Tulip,1,-1.00,100,1,"Invalid Price",20260330-093613.038
+aa17,ord6,Orchid,1,-1.00,1000,1,"Invalid Price",20260330-093613.038
