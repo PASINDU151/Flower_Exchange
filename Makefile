@@ -5,9 +5,11 @@ CXXFLAGS ?= -std=c++17 -O2 -Wall -Wextra -pthread -Iinclude
 
 SRC := $(wildcard src/*.cpp)
 
-# Cross-platform bits
-# - On Windows, set OS=Windows_NT in most environments.
-# - Use .exe suffix and Windows-friendly mkdir/rm/run commands.
+# Default input/output paths
+INPUT ?= data/orders.csv
+OUTPUT ?= data/execution_rep.csv
+
+# Windows vs Unix-like handling
 ifeq ($(OS),Windows_NT)
 	EXE := .exe
 	MKDIR_P := if not exist build mkdir build
@@ -29,7 +31,15 @@ $(OUT): $(SRC)
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(OUT)
 
 run: all
-	$(RUN_PREFIX)$(OUT) data/orders.csv data/execution_rep.csv
+	$(eval EXTRA_ARGS := $(filter-out run,$(MAKECMDGOALS)))
+	$(eval RUN_INPUT := $(if $(word 1,$(EXTRA_ARGS)),$(word 1,$(EXTRA_ARGS)),$(INPUT)))
+	$(eval RUN_OUTPUT := $(if $(word 2,$(EXTRA_ARGS)),$(word 2,$(EXTRA_ARGS)),$(OUTPUT)))
+	$(RUN_PREFIX)$(OUT) $(RUN_INPUT) $(RUN_OUTPUT)
 
 clean:
-	$(RM_RF)
+	-$(RM_RF)
+
+.PHONY: run clean all
+
+%:
+	@:

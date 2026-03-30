@@ -1,76 +1,152 @@
-# Flower_Exchange
+# 🌸 Flower Exchange
 
-A C++ flower exchange simulation with:
-- one order book per instrument
-- one queue per instrument
-- one worker thread per instrument
-- validation
-- price-time priority matching
-- execution report CSV generation
-- performance metrics for runtime, estimated memory, and secondary storage usage
+A high-performance C++ flower exchange simulation system featuring:
 
-## Folder layout
+- Multi-instrument order books  
+- Per-instrument parallel processing  
+- Price-time priority matching  
+- Order validation  
+- Execution report generation (CSV)  
+- Performance metrics (runtime, memory, storage)
 
-- `include/` - header files
-- `src/` - implementation files
-- `data/orders.csv` - sample input CSV
-- `data/execution_rep.csv` - output CSV appears here by default
-- `swap/` - spill files appear here if in-memory threshold is exceeded
-- `build/` - compiled executable appears here
+---
 
-## Build
+## 📁 Project Structure
 
-From the project root:
+```
+Flower_Exchange/
+├── include/
+├── src/
+├── data/
+│   ├── orders.csv
+│   └── execution_rep.csv
+├── swap/
+├── build/
+└── Makefile
+```
 
+---
+
+## 📥 Input & Output
+
+### Where to put input file
+Place your input CSV inside the `data/` folder.
+
+Example:
+```
+data/Example5_orders.csv
+```
+
+---
+
+### Where output will appear
+The output CSV will be generated in the `data/` folder by default:
+
+```
+data/execution_rep.csv
+```
+
+Or in your custom path if provided.
+
+---
+
+## ⚙️ Requirements
+
+- C++17 compatible compiler (`g++`)
+- `make`
+
+---
+
+## 🚀 Build & Run (Using Make)
+
+### 🟢 Note
+- Works directly on Linux/macOS
+- On Windows, use Git Bash, MSYS2, or WSL
+
+### Build
 ```bash
 make
 ```
 
-## Run
-
-Default run:
-
+### Run (default)
 ```bash
 make run
 ```
 
-Or explicitly:
-
+### Run with custom input/output
 ```bash
-./build/flower_exchange data/orders.csv data/execution_rep.csv
+make run INPUT=data/Example5_orders.csv OUTPUT=data/Example5_rep.csv
 ```
 
-On Windows with MinGW:
+---
 
+## 🖥️ Manual Compilation (Without Make)
+
+### Windows
 ```bash
 g++ -std=c++17 -O2 -Wall -Wextra -pthread -Iinclude src/*.cpp -o build/flower_exchange.exe
 build\flower_exchange.exe data/orders.csv data/execution_rep.csv
 ```
 
-## Where output appears
-
-- The execution report CSV is written to:
-
-```text
-data/execution_rep.csv
+### Linux / macOS
+```bash
+g++ -std=c++17 -O2 -Wall -Wextra -pthread -Iinclude src/*.cpp -o build/flower_exchange
+./build/flower_exchange data/orders.csv data/execution_rep.csv
 ```
 
-unless you pass a different output path as the second command-line argument.
+---
 
-## Where performance metrics appear
+## 📊 Output
 
-Performance metrics are printed in the terminal/console after execution, including:
-- total runtime in milliseconds
-- number of orders read
-- number of orders processed
-- number of reports generated
-- estimated current RAM
-- estimated peak RAM
-- secondary storage used
-- per-book active durations
+### Execution Report
+Generated CSV includes:
 
-## Notes
+- Order ID  
+- Client Order ID  
+- Instrument  
+- Side  
+- Execution Status (New / Rejected / Fill / PFill)  
+- Quantity  
+- Price  
+- Reason  
+- Timestamp  
 
-- The engine keeps orders in memory first.
-- If active orders exceed the in-memory threshold, lower-priority levels are spilled to files inside `swap/`.
-- The included sample CSV contains both valid and invalid orders so you can see matching and rejection behavior.
+---
+
+### Performance Metrics
+
+Printed in terminal after execution:
+
+- Total runtime  
+- Orders read  
+- Orders processed  
+- Reports generated  
+- Estimated memory usage  
+- Peak memory usage  
+- Secondary storage usage  
+- Per-instrument processing time  
+
+---
+
+## ⚠️ Notes
+
+- Orders are processed in memory first  
+- If memory threshold is exceeded, data spills into the `swap/` directory  
+- Sample CSV includes both valid and invalid orders for testing  
+
+---
+
+## 💡 Quick Start
+
+```bash
+make
+make run
+```
+
+---
+
+## 🧠 Matching Logic
+
+- Buy orders → higher price priority  
+- Sell orders → lower price priority  
+- Same price → FIFO (time priority)  

@@ -1,8 +1,7 @@
-Client Order ID,Order ID,Instrument,Side,Price,Quantity,Status,Reason,Transaction Time
-Cl. Ord.ID,ord1,Instrument,0,0.00,0,1,"Client Order ID Too Long",20260330-092847.286
-aa13,ord2,Rose,1,55.00,100,0,"",20260330-092847.287
-aa14,ord3,Rose,1,65.00,100,0,"",20260330-092847.287
-aa15,ord4,Rose,2,65.00,100,3,"",20260330-092847.287
-aa14,ord3,Rose,1,65.00,100,2,"",20260330-092847.287
-aa15,ord4,Rose,2,55.00,100,3,"",20260330-092847.287
-aa13,ord2,Rose,1,55.00,100,2,"",20260330-092847.287
+Order ID,Cl. Ord. ID,Instrument,Side,Exec Status,Quantity,Price,Reason,Transaction Time
+ord1,aa13,Rose,1,New,100,55.00,"",20260330-112935.376
+ord2,aa14,Rose,1,New,100,65.00,"",20260330-112935.376
+ord3,aa15,Rose,2,PFill,100,65.00,"",20260330-112935.376
+ord2,aa14,Rose,1,Fill,100,65.00,"",20260330-112935.376
+ord3,aa15,Rose,2,PFill,100,55.00,"",20260330-112935.376
+ord1,aa13,Rose,1,Fill,100,55.00,"",20260330-112935.376
